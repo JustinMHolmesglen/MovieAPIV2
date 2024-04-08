@@ -1,0 +1,67 @@
+<%- include('layout/header') %>  
+<div class="container-fluid">
+  <% if (isApiData) { %>
+    <div class="row">
+      <% if (apiData && apiData.length > 0) { %>  
+        <% apiData.forEach((item) => { %>
+      <div class="col-sm-2 col-md-4 p-5">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="title">
+              <%= item.original_title %>
+              
+            </h2>
+              <div class="card-container">
+                
+                  <img src="https://image.tmdb.org/t/p/original<%= item.poster_path %>" alt="<% item.original_title %>">
+                  
+                  <p class="about-movie">
+                  <%= item.overview %>
+                </p>
+              </div>
+          </div>
+        </div>
+        
+      </div>
+      <% }) %>
+      <% } %>
+    </div>
+    <a href="#top"><button class="btn btn-primary p-3">^ Return to Top ^</button></a>
+    <a href="#end"><button class="btn btn-warning p-3" id="down">⚓ Down to Bottom ⚓</button></a>
+<div id="end"></div>
+  <% } else { %>    
+      
+        <div class="row">
+          <div class="col-sm-4 col-md-5 p-5">
+            <h4>About</h4>
+            <p class="text-muted">
+              This Movie Database API was put together by Justin, to show
+              understanding of API calls and basic JavaScript and Node.js methods
+              and functions. It is part of a portfolio piece for the Diploma of
+              web development at Holmesglen TAFE.
+            </p>
+          </div>
+          <div class="col-sm-4 offset-md-1 p-5">
+            <h4>Contact</h4>
+            <ul class="list-unstyled">
+              <li>
+                <a href="https://www.themoviedb.org/login" class="p-1 font-weight-normal">
+                  Check out all other Movies @ <a href="https://www.themoviedb.org/login">TMDB</a>
+                </a>
+              </li>
+              <li>
+                <a
+                href=mailto:"justin.melbourne.80@gmail.com"
+                class="p-1 font-weight-normal"
+              >
+                Email me Here <i class="fas fa-envelope"></i>
+              </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% } %>
+      </div>
+<%- include('layout/footer') %>
+
+

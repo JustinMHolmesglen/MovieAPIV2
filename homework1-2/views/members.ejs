@@ -1,0 +1,139 @@
+<%- include('layout/header') %>
+<div class="container my_home">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <h1>Movie API</h1>
+        </div>
+        <div class="col-lg-12">
+            <% if (message) { %>
+            <div class="alert alert-dismissible fade show alert-<%= message.type %>" role="alert">
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong><%= message.message %></strong>
+            </div>
+            <% } %>
+            <div class="table-responsive">
+                <% if( userData ) { %>
+                <!-- && token logged in -->
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="table-dark">
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Phone</th>
+                                <th class="text-center">Action</th>
+                             </tr>
+                        </thead>
+                    <tbody>
+                        
+                        <!-- ternary operator for an if statement which will if users = true, do the loop, else if false echo : no users -->
+                        <% userData.forEach((row, index) => { %>
+
+                            <tr class="align-middle">
+                                <td><%= index %></td>
+                                <td><img src="<%= row.image %>" width="50" class="image-thumbnail" alt="profile pic"></td>
+                                <td><%= row.name %></td>
+                                <td><%= row.email %></td>
+                                <td><%= row.phone %></td>
+                                <td>
+                                    <!-- <button style="background:none; outline: none; border: none" href="/edit/<%= row._id%>" onclick="editUser('<%= row._id%>')" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></button> -->
+                                    <a href="/edit/<%= row._id%>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                                    <button style="background:none; outline: none; border: none" href="/delete/<%= row._id%>" onclick="deleteById('<%= row._id%>')" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></button>
+                                    <!-- <a href="/delete/<%= row._id%>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a> -->
+                                    <a href="/review/<%= row._id%>" class="text-warning"><i class="fas fa-star fa-lg mx-1"></i></a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <h2 class="text-center text-secondary mt-5">There are no users found in the database!</h2>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let token = localStorage.getItem("jpToken");
+    async function deleteById(id) {
+      try {
+        const resDelete = await fetch(`http://localhost:3000/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": `${token}`,
+          },
+        });
+        window.location.href = "/members";
+      } catch (error) {
+        console.error("Error parsing JSON response:", error);
+      }
+    }
+  </script>
+
+<!-- <script>
+    
+    async function editUser(id) {
+      try {
+        const resEdit = await fetch(`http://localhost:3000/edit/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": `${token}`,
+          },
+        });
+        window.location.href = "/members";
+      } catch (error) {
+        console.error("Error parsing JSON response:", error);
+      }
+    }
+  </script> -->
+
+<script>
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const image = document.getElementById('image');
+    const url = window.location.href;
+    const users = url.split('/').pop();
+    const submit = document.getElementById('submit1');
+    
+    
+        const headers = new Headers({
+        "Content-Type": "application/json",    
+        'x-auth-token': `${token}`
+      });
+
+    async function submitForm(event) {
+    event.preventDefault(); // prevent the form from submitting normally
+        try{
+    
+            const data = {
+                name: name.value,
+                email: email.value,
+                phone: phone.value,
+                image: image.value,
+                users: _id.value,
+                
+            }
+    
+    console.log(data)
+        
+    const response = await fetch(`http://localhost:3000/members/${users}`, {
+           method: 'POST',
+           headers,
+           body: JSON.stringify(data)
+        })
+    //     // Redirect the user to reviews members
+        
+    } catch (error) {
+           console.error('Error parsing JSON response:', error)
+    }
+       
+    }
+
+    </script>
+<%- include('layout/footer') %>
+
+

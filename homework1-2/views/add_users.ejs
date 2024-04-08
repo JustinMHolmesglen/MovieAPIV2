@@ -1,0 +1,54 @@
+<%- include('layout/header') %>
+
+<!-- ejs file is not connected to the database -->
+<div class="container form-box">
+    <div class="row">
+        <div class="col-lg-6 mx-auto mt-4">
+            <div class="card shadow" style="width: 600px;">
+                <div class="card-header bg-primary">
+                    <h3 class="text-light text-center">Add New User</h3>
+                    
+                </div>
+
+                    <div class="card-body p-4">
+                       <!--may not reach a location - but it does have an action, telling the data where to be placed-->
+                        <form action="/add" method="POST" id="add-form" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter name" required />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone">Phone</label>
+                                <input type="tel" name="phone" class="form-control form-control-lg" placeholder="Enter phone" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="image">Image</label>
+                                <input type="file" name="image" class="form-control form-control-lg" placeholder="Save image" accept=".jpg, .png" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Enter Password" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password1">Confirm Password</label>
+                                <input type="password" name="password1" class="form-control form-control-lg" placeholder="Enter Password" required />
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <input type="submit" name="submit" value="Add User" class="btn btn-primary btn-lg"/>
+                            </div>
+                        </form>
+                        
+                        
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</div>
+<%- include('layout/footer') %>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+</head>
+<body>
+    <div id="header"></div>
+    <div class="container">
+        <div class="row my-4">
+            <div id="hero_container" class="col-lg-12">
+                <h1 class="hero_title">Welcome to the Movie API</h1>
+                <img src="Japanese garden.png" alt="home-page-image"/>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+
+    <!-- Include React dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+
+    <!-- Include your React bundle -->
+    <script src="dist/bundle.js"></script>
+
+    <!-- Mount React components -->
+    <script>
+        // Render HeaderReact component into the 'header' mount point
+        ReactDOM.render(
+            React.createElement(HeaderReact),
+            document.getElementById('header')
+        );
+
+        // Render FooterReact component into the 'footer' mount point
+        ReactDOM.render(
+            React.createElement(FooterReact),
+            document.getElementById('footer')
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "name": "My Express App",
+    "node_crud_private_key": "node_crud",
+    "port": "3000",
+    "db": {
+        "connectionString": "mongodb://localhost:37017/node_crud"
+    }
+}

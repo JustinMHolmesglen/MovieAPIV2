@@ -1,0 +1,137 @@
+<%- include('layout/header') %>  
+<div class="container-fluid">
+  
+  <div class="row">
+    <% reviews.forEach((review) => { %>
+      <% const user = users.find((user) => user && user._id && user._id.toString() === review.userId && review.userId.toString()); %>
+  
+      <div class="col-sm-2 col-md-4 p-5">
+        <div class="card">
+          <div class="card-body">
+            <% let index = 0; %>
+  
+            <% while (index < users.length && index < 40) { %>
+              <% const row = users[index]; %>
+  
+              <% if (row._id && review.userId && row._id.toString() === review.userId.toString()) { %>
+                <h2>Review by <%= row.name %></h2>
+                <% break; %>
+              <% } %>
+  
+              <% index++; %>
+            <% } %>
+  
+            <h3>Movie: <%= review.movie %></h3>
+            <div class="card-container">
+              <% if (apiData && apiData.length > 0) { %>
+                <% apiData.forEach((item) => { %>
+                  <% if (item.original_title === review.movie) { %>
+                    <img src="/images?reviewId=<%= review.userId %>&userId=<%= review.user %>" alt="Movie Poster">
+                  <% } %>
+                <% }) %>
+              <% } %>
+  
+              <p class="about-movie">
+                <%= review.stars %>
+              </p>
+              <p>
+                <%= review.comment %>
+              </p>
+              <hr>
+  
+              <% users.forEach((row, index) => { %>
+                <% if (index < 40) { %>
+                  <img src="<%= row.image %>" width="50" class="image-thumbnail" alt="profile pic">
+                <% } %>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  
+  
+    <a href="#top"><button class="btn btn-primary p-3">^ Return to Top ^</button></a>
+ </div>
+<%- include('layout/footer') %>
+
+const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const image = document.getElementById('image');
+    const imagePath = document.getElementById('imagePath');
+    const password = document.getElementById('password');
+    const password1 = document.getElementById('password1');
+    const url = window.location.href;
+    const user = url.split('/').pop();
+    const submit = document.getElementById('submit');
+   
+
+    submit.addEventListener('click', function(e){
+        submitForm(e);
+    });
+  
+    let imageFile = null
+    // Add an event listener to the image input to listen for changes
+    image.addEventListener('change', function() {
+  // Create a new FileReader object
+    const reader = new FileReader();
+
+  // When the reader has finished reading the file, set the imagePath value to the data URL
+    reader.addEventListener('load', function() {
+    imagePath.value = reader.result;
+  });
+
+  // Read the contents of the file as a data URL
+  //imageFile = reader.readAsDataURL(image.files[0]);
+    imageFile = image.files[0]
+    console.log(image.files[0])
+    console.log(imageFile);
+});
+  
+    async function submitForm(event) {
+    event.preventDefault(); // prevent the form from submitting normally
+    try{
+    
+    const data = {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        image: imageFile,
+        password: password.value,
+        password1: password1.value,
+
+    }
+    // data.append('imagePath', '<%= imagePath %>');
+    const formData = prepareFormData(data);
+    console.log(data)    
+    const formConfig = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    };
+
+        const response = await axios.post(`http://localhost:3000/register/`, formData, formConfig)
+       
+       
+        const { user, token } = response.data;
+        console.log(token);
+        localStorage.setItem('jpToken', token);
+      } catch(error) {
+        // handle error
+        console.error("error parsing JSON response", error);
+      }
+    }
+      
+//Formats data to form data format
+function prepareFormData(data) {
+    console.log(data);
+  let formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('email', data.email);
+  formData.append('phone', data.phone);
+  formData.append('image', data.image);
+  formData.append('password', data.password);
+  formData.append('password1', data.password1);
+  return formData;

@@ -1,0 +1,101 @@
+<%- include('layout/header') %>
+
+<div class="container form-box register_me">
+    <div class="row">
+        <div class="col-lg-6 mx-auto mt-4">
+            <div class="card shadow" style="width: 600px;">
+                <div class="card-header bg-warning">
+                    <h3 class="text-light text-center">Register User</h3>
+                    
+                </div>
+
+                    <div class="card-body p-4">
+                        <form method="POST" action="/register" id="register-form" >
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter name" required />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required />
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control form-control-lg" placeholder="Enter phone" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="image">Select Image</label>
+                                <input type="file" id="image" name="image" class="form-control form-control-lg" accept=".jpg, .png" required  />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Enter Password" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password1">Confirm Password</label>
+                                <input type="password" id="password1" name="password1" class="form-control form-control-lg" placeholder="Enter Password" required />
+                            </div>
+                            <!-- <div class="mb-3">
+                                <input type="hidden" id="imagePath" name="imagePath" value="<%= imagePath %>">
+                            </div> -->
+                            <div class="mb-3 d-grid">
+                                <button id="submit" type="submit" class="btn btn-primary btn-lg" onclick="submitForm(event)">Submit</button>
+                            </div>
+                        </form>
+                        
+                        
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    
+const name = document.getElementById('name');
+const email = document.getElementById('email');
+const phone = document.getElementById('phone');
+const image = document.getElementById('image');
+const password = document.getElementById('password');
+const password1 = document.getElementById('password1');
+const submit = document.getElementById('submit');
+
+submit.addEventListener('click', submitForm);
+
+// Add an event listener to the image input to listen for changes
+image.addEventListener('change', function() {
+  // Get the selected file object
+  const file = image.files[0];
+  console.log(file);
+});
+
+async function submitForm(event) {
+  event.preventDefault(); // prevent the form from submitting normally
+  try {
+    const data = new FormData();
+    data.append('name', name.value);
+    data.append('email', email.value);
+    data.append('phone', phone.value);
+    data.append('image', image.files[0]);
+    data.append('password', password.value);
+    data.append('password1', password1.value);
+
+    const response = await axios.post('http://localhost:3000/register', data);
+
+    const { user, token } = response.data;
+    console.log(token);
+    localStorage.setItem('jpToken', token);
+    window.location.href = '/members';
+
+  } catch (error) {
+    // handle error
+    console.error('Error:', error);
+  }
+}
+
+    
+  </script>
+<%- include('layout/footer') %>

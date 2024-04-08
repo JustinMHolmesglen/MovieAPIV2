@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+      <% if (apiData && apiData.length > 0) { %>  
+        <% apiData.forEach((item) => { %>
+      <div class="col-sm-2 col-md-4 p-5">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="title">
+              <%= item.original_title %>
+              
+            </h2>
+              <div class="card-container">
+                
+                  <img src="https://image.tmdb.org/t/p/original<%= item.poster_path %>" alt="<% item.original_title %>">
+                  
+                  <p class="about-movie">
+                  <%= item.overview %>
+                </p>
+              </div>
+          </div>
+        </div>
+        
+      </div>
+      <% }); %>
+      <% } %>
+    </div>
+    
+  </div>

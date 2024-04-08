@@ -1,0 +1,75 @@
+<%- include('layout/header') %>  
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="text-center p-5">Reviews for Movies</h2>
+        <% reviews.forEach((review, index) => { %>
+          <% const user = users[index]; %> 
+            <!-- .find((user) => user && user._id && user._id.toString() === review.userId.toString()); %> -->
+          
+            <div class="col-sm-2 col-md-4 p-5">
+            <div class="card">
+              <div class="card-body">
+                <% if (user && user._id) { %>
+                  <% const userImage = user.image; %>
+                  <h2>Review by <%= user.name %></h2>
+                  <img style="margin: 0 auto; display: block" src="<%= userImage %>" width="300" class="image-thumbnail" alt="profile pic">
+                <% } else { %>
+                  <h2>Unknown User</h2>
+                <% } %>
+                <h3>Movie: <%= review.movie %></h3>
+                <div class="card-container">
+                  <% if (apiData && apiData.length > 0) { %>
+                    <% apiData.forEach((item) => { %>
+                      <% if (item.original_title === review.movie) { %>
+                        <img src="/images?reviewId=<%= review.userId %>&userId=<%= user._id %>" alt="Movie Poster">
+                      <% } %>
+                    <% }) %>
+                  <% } %>
+                  <p class="about-movie">
+                    <%= review.stars %>
+                  </p>
+                  <p>
+                    <%= review.comment %>
+                  </p>
+                  <hr>
+                  <% if (user && user._id) { %>
+                    <!-- <% users.forEach((row, index) => { %>
+                      <img src="<%= row.image %>" width="50" class="image-thumbnail" alt="profile pic">
+                    <% }); %> -->
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <div class="search-results row">
+      <% if (searchResults && searchResults.length > 0) { %>
+        <% searchResults.forEach((result) => { %>
+            <div class="col-sm-2 col-md-4 col-lg-6 p-5">
+                <div class="card">
+                    <div class="card-body">
+            
+              <div class="search-result">
+                <h2><%= result.original_title %></h2>
+                <img src="https://image.tmdb.org/t/p/original<%= result.poster_path %>" alt="<%= result.original_title %>">
+                <p><%= result.overview %></p>
+              </div>
+            
+              </div>
+              </div>
+              </div>
+          <!-- Display other review details as needed -->
+        <% }) %>
+      <% } else { %>
+        <p>No results found.</p>
+      <% } %>
+    </div>
+    
+    <a href="#top"><button class="btn btn-primary p-3">^ Return to Top ^</button></a>
+  </div>
+  <a href="#end"><button class="btn btn-warning p-3" id="down">⚓ Down to Bottom ⚓</button></a>
+<div id="end"></div>  
+</div>
+  
+<%- include('layout/footer') %>

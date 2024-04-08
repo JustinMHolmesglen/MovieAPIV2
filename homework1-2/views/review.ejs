@@ -1,0 +1,94 @@
+<%- include('layout/header') %>
+
+
+<!--ejs file is not connected to the database -->
+<div class="container form-box">
+    <div class="row">
+      <div class="col-lg-6 mx-auto mt-4">
+        <div class="card shadow" style="width: 600px;">
+          <div class="card-header bg-dark">
+            <h3 class="text-light text-center">Leave a Review </h3>
+          </div>
+          <div class="card-body p-4">
+            <form method="POST" id="review-form">
+                <div class="mb-3">
+                  <label for="movie">Enter The Movie</label>
+                  <input id="movie" type="text" name="movie" class="form-control form-control-lg" placeholder="What movie do you want to review?" required/>
+                </div>
+              <div class="mb-3">
+                <label for="stars">Star Rating</label>
+                <select id="stars" name="stars" class="form-control form-control-lg" placeholder="Enter your star rating" required>
+                  <option value="1 Star Review">&#9733;</option>
+                  <option value="2 Star Review">&#9733;&#9733;</option>
+                  <option value="3 Star Review">&#9733;&#9733;&#9733;</option>
+                  <option value="4 Star Review">&#9733;&#9733;&#9733;&#9733;</option>
+                  <option value="5 Star Review">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="comment">Enter Your Review</label>
+                <input id="comment" type="textarea" name="comment" class="form-control form-control-lg" placeholder="Enter your Review Comments" />
+              </div>
+              <div class="mb-3 d-grid">
+                <button id="submit" type="submit" class="btn btn-primary btn-lg">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+
+    const movie = document.getElementById('movie');
+    const stars = document.getElementById('stars');
+    const comment = document.getElementById('comment');
+    const url = window.location.href;
+    const userId = url.split('/').pop();
+    const submit = document.getElementById('submit');
+    let token = localStorage.getItem('token')
+    
+
+
+    const headers = new Headers({
+      "Content-Type": "application/json",    
+      'x-auth-token': `${token}`
+    });
+
+    
+    
+
+    submit.addEventListener('click', function(e){
+      submitForm(e);
+    });
+
+
+    async function submitForm(event) {
+    event.preventDefault(); // prevent the form from submitting normally
+    try{
+
+      const data = {
+      movie: movie.value,
+      stars: stars.value,
+      comment: comment.value,
+    }
+
+    console.log(data)
+    
+      const response = await fetch(`http://localhost:3000/review/${userId}`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(data)
+    })
+    // Redirect the user to reviews members
+    
+    } catch (error) {
+      console.error('Error parsing JSON response:', error)
+    }
+   
+  }
+    
+  </script>
+    
+<%- include('layout/footer') %>

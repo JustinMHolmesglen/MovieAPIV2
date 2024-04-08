@@ -1,0 +1,11 @@
+<%- include('layout/header') %>
+<div><h2>Logout</h2></div>
+<script>
+function logout(){
+    localStorage.removeItem(jpToken);
+    sessionStorage.removeItem(jpToken);
+  }
+
+</script>
+
+<%- include('layout/footer') %>

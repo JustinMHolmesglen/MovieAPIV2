@@ -1,0 +1,8 @@
+{
+    "name": "My Express App",
+    "node_crud_private_key": "node_crud_private_key",
+    "port": "PORT",
+    "db": {
+        "connectionString": "DB_CONNECTION_STRING"
+    }
+}

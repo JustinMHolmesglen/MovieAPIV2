@@ -1,0 +1,54 @@
+<%- include('layout/header') %>  
+<div class="container-fluid">
+  
+  <div class="row">
+  <% reviews.forEach((review) => { %>
+    <% const user = users.find((user) => user && user._id && user._id.toString() === review.userId && review.userId.toString()); %>
+
+    <div class="col-sm-2 col-md-4 p-5">
+      <div class="card">
+        <div class="card-body">
+          <% if (user && user._id) { %>
+            <% const userImage = user.image; %>
+            <h2>Review by <%= user.name %></h2>
+            <img src="<%= userImage %>" width="50" class="image-thumbnail" alt="profile pic">
+          <% } else { %>
+            <h2>Unknown User</h2>
+          <% } %>
+
+          <h3>Movie: <%= review.movie %></h3>
+          <div class="card-container">
+            <% if (apiData && apiData.length > 0) { %>
+              <% apiData.forEach((item) => { %>
+                <% if (item.original_title === review.movie) { %>
+                  <img src="/images?reviewId=<%= review.userId %>&userId=<%= user._id %>" alt="Movie Poster">
+                <% } %>
+              <% }) %>
+            <% } %>
+
+            <p class="about-movie">
+              <%= review.stars %>
+            </p>
+            <p>
+              <%= review.comment %>
+            </p>
+            <hr>
+
+            <% if (user && user._id) { %>
+              <% users.forEach((row, index) => { %>
+
+              <img src="<%= row.image %>" width="50" class="image-thumbnail" alt="profile pic">
+                <% }); %>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+  
+  
+    <a href="#top"><button class="btn btn-primary p-3">^ Return to Top ^</button></a>
+ </div>
+<%- include('layout/footer') %>

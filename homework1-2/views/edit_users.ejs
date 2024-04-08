@@ -1,0 +1,111 @@
+<%- include('layout/header') %>
+
+
+    <div class="container form-box">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mt-4">
+                <div class="card shadow" style="width: 600px;">
+                    <div class="card-header bg-success">
+                        <h3 class="text-light text-center">Edit User (<%= users.name %>)</h3>
+
+                    </div>
+
+                    <div class="card-body p-4">
+                        <!-- <form action="/update/<%= users._id %>" method="POST" id="edit-form" enctype="multipart/form-data">
+                             -->
+                             <form method="POST" action="/edit/<%= users._id %>" id="edit-form"/> 
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input id="name" type="text" name="name" class="form-control form-control-lg"
+                                    placeholder="Enter name" value="<%= users.name %>" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email">Name</label>
+                                <input id="email" type="email" name="email" class="form-control form-control-lg"
+                                    placeholder="Enter email" value="<%= users.email %>" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone">Phone</label>
+                                <input id="phone" type="tel" name="phone" class="form-control form-control-lg"
+                                    placeholder="Enter phone" value="<%= users.phone %>" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Select Image</label>
+                                <input id="image" type="file" name="image" class="form-control form-control-lg" />
+                                <img src="/<%= users.image %>" width="100" class="img-thumbnail mt-1" alt="">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Enter Password" required />
+                            </div> -->
+                            
+                            <input type="hidden" name="image" value="<%= users.image %>" />
+                            <div class="mb-3 d-grid">
+                                <button id="submit1" type="submit" value="Update User" class="btn btn-success btn-lg">Submit</button>
+                            </div>
+                        </form>
+                        
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+        const image = document.getElementById('image');
+        const url = window.location.href;
+        const users = url.split('/').pop();
+        const submit = document.getElementById('submit1');
+        // let token = localStorage.getItem('token')
+        
+        // const headers = new Headers({
+        //     "Content-Type": "application/json",    
+        //     'x-auth-token': `${token}`
+        // });
+        
+        submit.addEventListener('click', function(e){
+            submitForm(e);
+        })  ;
+        
+        async function submitForm(event) {
+            event.preventDefault(); // prevent the form from submitting normally
+            try{
+                
+                const data = {
+                    name: name.value,
+                    email: email.value,
+                    phone: phone.value,
+                    image: image.value,
+                    // user: users,
+                    
+                }
+                
+                console.log(data)
+                
+                const response = await fetch(`http://localhost:3000/edit/${users}`, {
+                    method: 'PUT',
+                    headers: {
+                        'x-auth-token': localStorage.getItem('jpToken'),
+                        'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify(data)
+                })
+                window.location.href = '/members';
+
+                
+            } catch (error) {
+           console.error('Error parsing JSON response:', error)
+        }
+        
+    }
+    
+    </script>
+    
+    <%- include('layout/footer') %>

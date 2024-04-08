@@ -1,0 +1,219 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    background: rgb(0,255,255);
+    background: linear-gradient(0deg, rgba(0,255,255,1) 0%, rgba(9,9,121,1) 35%, rgba(255,253,100,1) 100%);
+    
+}
+/* Home page */
+#hero_container{
+    position: relative;
+    width: 100vw !important;
+    max-width: 100% !important;
+}
+
+#hero_container > h1{
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: .5px 2px 3px #000;
+    z-index: 9;
+}
+
+#hero_container > img{
+    position: relative;
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+        
+}
+
+#hero_container > h1{
+    text-align: center;
+}
+
+/* 404 form*/
+
+#\34 04_container{
+    position: relative;
+    
+}
+
+#\34 04_container > img{
+    position: relative;
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    
+}
+
+#\34 04_container > h1{
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: .5px 2px 3px #000;
+}
+#\34 04_container > a > button{
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -50%);
+    box-shadow: .5px 2px 3px #000;
+    color: #fff;
+    font-size: 28px;
+    padding: 12px 16px;
+    scale: 1;
+    transition: 1s;
+}
+
+#\34 04_container > a > button:hover{
+    scale: 0.95;
+    cursor: pointer;
+    transition: 1s;
+}
+
+@media only screen and (min-width: 992px){
+.col-lg-6 {
+    flex: 0 0 auto;
+    width: 100%;
+    
+}
+#\34 04_container > a > button{
+top: 60%;
+}
+}
+
+/* Add user */
+body > div.form-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.card-body{
+box-shadow: 2px 3px 10px #030303;
+outline: none;
+border: 0;
+}
+/*about page*/
+body > div > div > div.col-sm-4.offset-md-1.p-5 > ul > li > a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+body > div > div > div.col-sm-4.col-md-5.p-5 > p{
+    font-size: 30px;
+    text-shadow: 1px 1px 3px #fff;
+}
+
+/*contact page*/
+body > div > div > div > ul > li > a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/*register page background*/
+body > div.register_me{
+    background-image: url("endless.jpg");
+    background-repeat: repeat;
+    max-width: 100%;
+    height: 100vh;
+}
+/* home page background*/
+body > div.my_home{
+    background: rgba(235,235,235, 0.3);
+    box-shadow: 2px 3px 10px #030303;
+    border-radius: 7px;
+    padding: 12px 20px;
+    margin-top: 20px;
+}
+
+/* card formatting on desktop*/
+
+body > div.container-fluid > div > div > div > div > h2{
+    margin: 0 0 30px 0;
+    padding: 20px 0;
+}
+
+body > div.container-fluid > div > div > div > div > div > img{
+    max-width: 100% !important;
+   
+}
+
+body > div.container-fluid > div > div {
+    max-width: 30%;
+}
+
+body > div > div > div > div > div > div > p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+body > div > a > button{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    font-size: 1.8rem;
+    padding: 1.2rem 1rem;
+}
+
+/* reviews card formatting on desktop */
+body > div.container-fluid > div > div > div > div > h2{
+    margin: 0 0 30px 0;
+    padding: 20px 0;
+}
+
+body > div > div.search-results > div > div > div > div > img{
+    max-width: 100% !important;
+    width: 100%;
+    min-height: 500px;
+   
+   
+}
+
+body > div.container-fluid > div > div {
+    max-width: 30%;
+    
+}
+
+body > div > div.search-results > div > div > div > div > p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+body > div > a > button{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    font-size: 1.8rem;
+    padding: 1.2rem 1rem;
+}
+
+#down{
+    position: fixed;
+    right: 0;
+    top: 60%;
+   
+}
+
+body > div.container-fluid > div > div{
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#hero_container > img{
+    width: 100vw;
+    height: 100vh;
+}

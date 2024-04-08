@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=">
+        <title>Movie API</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
+        
+       
+    
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid" style="width:100%">
+            <a href="/" class="navbar-brand"><i class="fas fa-code me-2"></i>JP Computer Systems</a>
+            <button class="navbar-toggler" data-bs-target="#my-nav" data-bs-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a href="/" class="nav-link"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/register" class="nav-link"><i class="fa-solid fa-id-card me-1"></i>Register</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/members" class="nav-link"><i class="fas fa-user-plus me-1"></i>Users</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/reviews" class="nav-link"><i class="fa-solid fa-book"></i>&nbsp;Look at Reviews</a>
+                    </li>
+                        <form class="d-flex" role="search" id="reviewForm" action="/reviews" method="GET">
+                            <input class="form-control me-2" id="reviewInput" name="review" type="text" placeholder="Search For Movie Reviews" aria-label="Search">
+                            <button class="btn btn-outline-info" id="reviewButton" type="submit">Search For Movie Reviews</button>
+                        </form>
+                    <li class="nav-item active">
+                        <a href="/about" class="nav-link"><i class="fas fa-globe me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/contact" class="nav-link"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/login" class="nav-link"><i class="fa-solid fa-arrow-right-to-bracket me-1"></i>Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="#" onclick="logout()" class="nav-link"><i class="fa-solid fa-person-walking-arrow-right"></i>&nbsp;Logout</a>
+                    </li>
+                    <form class="d-flex" role="search" id="searchForm" action="/api-data" method="GET">
+                        <input class="form-control me-2" id="searchInput" name="query" type="text" placeholder="Search For Movies..." aria-label="Search">
+                        <button class="btn btn-outline-info" id="searchButton" type="submit">Search For Movies</button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function logout(){
+            localStorage.removeItem('jpToken');
+            sessionStorage.removeItem('jpToken');
+          }
+        
+        </script>
+    
+    
